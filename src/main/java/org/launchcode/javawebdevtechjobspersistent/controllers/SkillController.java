@@ -32,7 +32,7 @@ public class SkillController {
             return "skills/add";
         }
         else { skillRepository.save(newSkill); }
-        return "redirect:";
+        return "redirect:../";
     }
 
     @GetMapping("view/{skillId}")
@@ -40,11 +40,11 @@ public class SkillController {
 
         Optional optSkill = skillRepository.findById(skillId);
         if (optSkill.isPresent()) {
-            Skill skill = (Skill) optSkill.get();
-            model.addAttribute("skill", skill);
+            Skill skills = (Skill) optSkill.get();
+            model.addAttribute("skills", skills);
             return "skills/view";
         } else {
-            return "redirect:../";
+            return "redirect:";
         }
     }
 }
