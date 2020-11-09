@@ -12,9 +12,6 @@ public class Skill extends AbstractEntity {
     @Size(min=1, max=250)
     private String description;
 
-    @ManyToMany(mappedBy = "skills")
-    private Job jobs;
-
     public Skill() { }
 
     public String getDescription() { return description; }
