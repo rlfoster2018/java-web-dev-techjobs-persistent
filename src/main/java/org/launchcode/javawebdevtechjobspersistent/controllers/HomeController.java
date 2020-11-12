@@ -75,7 +75,7 @@ public class HomeController {
             }
         }
 
-        newJob.setSkills(skillList.toString());
+        newJob.setSkills(skillList);
         jobRepository.save(newJob);
         return "redirect:";
     }

@@ -8,4 +8,5 @@
 -- drop table `techjobs`.`jobs`
 
 ## Part 4: Test it with SQL
---
+-- select job.name, skill.name, skill.description FROM job inner join skill on job.skill_id=skill.id
+-- order by skill.name desc where job.name is not null

@@ -1,6 +1,8 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
+import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
@@ -43,12 +45,24 @@ public class ListController {
     @RequestMapping("")
     public String list(Model model) {
 
+        Iterable<Job> jobs = jobRepository.findAll();
+        Iterable<Skill> skills = skillRepository.findAll();
+        Iterable<Employer> employers = employerRepository.findAll();
+
+        model.addAttribute("title","List");
+        model.addAttribute("jobs", jobs);
+        model.addAttribute("skills", skills);
+        model.addAttribute("employers", employers);
+
         return "list";
     }
 
     @RequestMapping(value = "jobs")
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         Iterable<Job> jobs;
+        Iterable<Skill> skills = skillRepository.findAll();
+        Iterable<Employer> employers = employerRepository.findAll();
+
         if (column.toLowerCase().equals("all")){
             jobs = jobRepository.findAll();
             model.addAttribute("title", "All Jobs");
@@ -57,6 +71,8 @@ public class ListController {
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         }
         model.addAttribute("jobs", jobs);
+        model.addAttribute("skills", skills);
+        model.addAttribute("employers", employers);
 
         return "list-jobs";
     }
